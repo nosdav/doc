@@ -5,32 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Split Screen Markdown Editor</title>
     <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+      }
       #editor,
       #preview {
-        width: 50%;
-        float: left;
+        width: 48%;
+        padding: 20px;
         box-sizing: border-box;
-        padding: 10px;
+        float: left;
+        margin: 1%;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
-
       #saveButton {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background-color: #008cba; /* Blue */
+        background-color: #008cba;
         border: none;
         color: white;
         padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
         border-radius: 12px;
         cursor: pointer;
+        transition: background-color 0.3s;
       }
-
       #saveButton:hover {
-        background-color: #005f5f;
+        background-color: #006f8a;
+      }
+      #currentUri {
+        margin: 20px 0;
+        padding: 0 20px;
+        font-size: 18px;
       }
     </style>
   </head>
