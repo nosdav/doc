@@ -95,21 +95,22 @@
         .addEventListener('click', function (e) {
           const target = e.target
           if (target.tagName.toLowerCase() === 'a') {
-            e.preventDefault()
-            const newUrl = new URL(window.location.href)
-            const currentUri = new URL(
-              newUrl.searchParams.get('uri'),
-              window.location.origin
-            )
-            const newUri = new URL(
-              target.getAttribute('href'),
-              currentUri
-            ).toString()
-            newUrl.searchParams.set('uri', newUri)
-            history.pushState(null, '', newUrl.toString())
-            document.getElementById('uriDisplay').textContent = newUri
+            const href = target.getAttribute('href')
+            if (href.endsWith('.md')) {
+              // Check if link ends with .md
+              e.preventDefault()
+              const newUrl = new URL(window.location.href)
+              const currentUri = new URL(
+                newUrl.searchParams.get('uri'),
+                window.location.origin
+              )
+              const newUri = new URL(href, currentUri).toString()
+              newUrl.searchParams.set('uri', newUri)
+              history.pushState(null, '', newUrl.toString())
+              document.getElementById('uriDisplay').textContent = newUri
 
-            fetchMarkdown(newUri)
+              fetchMarkdown(newUri)
+            }
           }
         })
 
