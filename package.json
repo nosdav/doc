@@ -1,0 +1,14 @@
+{
+  "name": "nosdav_doc",
+  "version": "0.0.0",
+  "description": "nosdav markdown doc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Melvin Carvalho",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^9.0.3"
+  }
+}
