@@ -12,9 +12,30 @@
         box-sizing: border-box;
         padding: 10px;
       }
+
+      #saveButton {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #008cba; /* Blue */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      #saveButton:hover {
+        background-color: #005f5f;
+      }
     </style>
   </head>
   <body>
+    <button id="saveButton" onclick="saveMarkdown()">Save</button>
     <div id="editor">
       <textarea
         id="markdownInput"
@@ -25,6 +46,7 @@
     <div id="preview"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="./js/nosdav-shim"></script>
 
     <script type="text/javascript">
       async function fetchMarkdown(uri) {
@@ -33,6 +55,25 @@
         document.getElementById('markdownInput').value = text
         updateOutput()
       }
+
+      async function saveMarkdown() {
+        console.log('saveMarkdown', uri)
+        const input = document.getElementById('markdownInput').value
+        await fetch(uri, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'text/markdown'
+          },
+          body: input
+        })
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && e.code === 'KeyM') {
+          e.preventDefault()
+          saveMarkdown()
+        }
+      })
 
       function updateOutput() {
         const input = document.getElementById('markdownInput').value
